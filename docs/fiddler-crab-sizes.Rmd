@@ -45,8 +45,13 @@ crab_table <- crab_table_data %>%
   
 crab_table
 ```
-hale_sightings %>% 
-  kable(col.names = c("Date", "Site", "Whale Species", "Distance (m)", "Behavior")) %>% 
-  kable_paper(full_width = FALSE) %>% 
-  column_spec(1, background = "cyan", color = "red")
+
+```{r, fig.alt = "Scatterplot showing crab carapace width (mm) decreasing as a function of mean annual water temperature (degrees Celsius).", echo = FALSE}
+crab_scatter <- ggplot(data = crabs, aes(x = MATW, y = carapace_width)) +
+  geom_point(aes(color = Site))
+
+crab_scatter
+```
+
+Crab carapace width (mm) as a function of mean annual water temperature (degrees Celsius).
 
