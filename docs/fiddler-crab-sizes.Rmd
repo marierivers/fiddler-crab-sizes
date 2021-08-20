@@ -10,6 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(here)
 library(janitor)
+library(kableExtra)
 ```
 
 ```{r, echo = FALSE}
@@ -28,4 +29,24 @@ crab_plot <- ggplot(data = crabs, aes(x = Latitude, y = carapace_width)) +
 crab_plot
 ```
 
+```{r, echo=FALSE}
+crab_table_data <- crabs %>% 
+  group_by(Site) %>% 
+  summarise(mean_width = round(mean(carapace_width), 2),
+            sd_width = round(sd(carapace_width), 2),
+            sample_size = n())
+
+crab_table <- crab_table_data %>% 
+  kable(col.names = c("Site Name", "Mean Width (mm)", "Standard Deviation of Width (mm)", "Sample Size"), align = "c") %>% 
+  kable_paper() %>% 
+  row_spec(c(1, 3, 5), background = "blue", color = "cyan") %>% 
+  column_spec(c(1, 3), background = "darkgray", color = "red") 
+  
+  
+crab_table
+```
+hale_sightings %>% 
+  kable(col.names = c("Date", "Site", "Whale Species", "Distance (m)", "Behavior")) %>% 
+  kable_paper(full_width = FALSE) %>% 
+  column_spec(1, background = "cyan", color = "red")
 
