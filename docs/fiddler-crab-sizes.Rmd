@@ -12,7 +12,20 @@ library(here)
 library(janitor)
 ```
 
-```{r}
+```{r, echo = FALSE}
 crabs <- read_csv(here("data", "HTL-MAR-FiddlerCrabBodySize.csv"))
 ```
+
+
+```{r, fig.alt = "Scatterplot indicating positive correlation between latitude in degrees and crab carapace width in mm between Florida and Massachusetts.", echo = FALSE}
+crab_plot <- ggplot(data = crabs, aes(x = Latitude, y = carapace_width)) +
+  geom_point() +
+  labs(title = "Crab size by latitude",
+       x = "Latitude (degrees)",
+       y = "Carapace width (mm)",
+       caption = "Crab carapace width in mm compared to latitude in degrees")
+
+crab_plot
+```
+
 
